@@ -4,7 +4,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import { OPENAI_API_KEY } from '@env';
+import { OPENAI_API_KEY } from '../.env.local';
 
 function ClothingCareAssistantScreen() {
   const [messages, setMessages] = useState([]);
