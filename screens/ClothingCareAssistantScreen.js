@@ -4,7 +4,6 @@ import * as ImagePicker from 'expo-image-picker';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import { OPENAI_API_KEY } from '../.env.local';
 
 function ClothingCareAssistantScreen() {
   const [messages, setMessages] = useState([]);
@@ -66,7 +65,7 @@ function ClothingCareAssistantScreen() {
   };
 
   const callOpenAIAPI = async (text, imageUri) => {
-    const API_KEY = OPENAI_API_KEY;
+    const API_KEY = process.env.OPENAI_API_KEY
     const API_URL = 'https://api.openai.com/v1/chat/completions';
   
     let messages = [

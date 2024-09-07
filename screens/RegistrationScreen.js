@@ -11,13 +11,33 @@ function RegistrationScreen({ navigation }) {
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
 
+  const createUserDoc = async(uid)=>{
+    fetch("http://localhost:8080/user/addUser",
+      {
+        method:"POST",
+        body:JSON.stringify({
+          "user_id":uid,
+          "customer_id":"none"
+        }),
+        headers:{
+          "Content-Type":"application/json",
+        }
+      }
+    ).then((res)=>{
+      console.log(res.status)
+    })
+  }
+
   const handleRegister = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
         const user = userCredential.user;
-        return updateProfile(user, {
-          displayName: `${firstName} ${lastName}`
-        });
+        // TODO: there may be a cleaner way to write this
+        return createUserDoc(user.uid).then(()=>{
+          return updateProfile(user, {
+            displayName: `${firstName} ${lastName}`
+          });
+        })
       })
       .then(() => {
         console.log('Registration successful');
